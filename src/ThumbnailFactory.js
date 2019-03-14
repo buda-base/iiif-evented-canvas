@@ -48,8 +48,11 @@ var getThumbUrl = function(resource, width) {
       return id;
     }
   }
-  else { // we still don't want the full size
-    return id.replace("/full/full/", buildResourceSize());
+  else { 
+    if(resource && resource.service && resource.service.profile && resource.service.profile.match(/level0/))
+      return id.replace("/full/full/", "/full/max/");
+    else    // we still don't want the full size
+      return id.replace("/full/full/", buildResourceSize());
   }
 };
 
